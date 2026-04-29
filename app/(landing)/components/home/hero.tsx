@@ -12,7 +12,7 @@ const HeroSection = () => {
                 />
                 {/* BAWAH: textnya bisa punya width 75% (25% gambar), margin 40 biar ke kanan */}
                 <div className="relative ml-40 w-full"> 
-                    <div className="text-primary italic">Friday Sale 50%</div>
+                    <div className="text-primary italic rounded-[50px] bg-[#FF5F3F1C] inline-flex items-center justify-center px-[22px] py-[8px]">Friday Sale, 50%</div>
                     <h1 className="font-extrabold text-[95px] italic bg-gradient-to-b leading-tight from-black to-[#979797] bg-clip-text text-transparent">
                         WEAR YOUR <br /> TOP-QUALITY <br /> SPORTWEAR
                     </h1>
