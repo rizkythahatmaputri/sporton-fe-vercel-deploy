@@ -3,7 +3,7 @@ import Image from "next/image";
  
  const Footer = () => {
     return (
-        <footer className="bg-dark-alternate text-white mt-52 md:px-20">
+        <footer className="bg-dark-alternate text-white md:px-20">
             <div className="container mx-auto flex justify-between pt-14 pb-24">
                 <div className="w-105">
                     <Image src="/images/logo-footer.svg" alt="logo dporton footer" width={187} height={44} />
