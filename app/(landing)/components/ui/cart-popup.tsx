@@ -3,7 +3,9 @@ import Image from "next/image";
 import Button from "./button";
 import { FiTrash2, FiArrowRight } from "react-icons/fi";
 
- export const cartList = [
+import { useRouter } from "next/navigation";
+
+export const cartList = [
   {
     name: "SportOn Product 1",
     category: "Running",
@@ -35,6 +37,11 @@ import { FiTrash2, FiArrowRight } from "react-icons/fi";
 ];
 
 const CartPopup = () => {
+  const { push } = useRouter();
+  const handleCheckout = () => {
+    push("/checkout");
+  };
+
   // pakai reduce dari javascript, hitung total harga di cartList
   const totalPrice = cartList.reduce(
     (total, item) => total + item.price * item.qty,
@@ -86,7 +93,12 @@ const CartPopup = () => {
             {priceFormatter(totalPrice)}
           </div>
         </div>
-        <Button variant="dark" size="small" className="w-full mt-4">
+        <Button
+          variant="dark"
+          size="small"
+          className="w-full mt-4"
+          onClick={handleCheckout}
+        >
           Checkout Now
           <FiArrowRight size={20} />
         </Button>

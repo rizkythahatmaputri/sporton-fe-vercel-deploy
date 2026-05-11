@@ -1,14 +1,31 @@
 // step pembayaran kartu sebelah kiri
 // pakai props cardwithheader juga
 
+"use client";
+
 import { FiCheckCircle } from "react-icons/fi";
 import CardWithHeader from "../ui/card-with-header";
 import FileUpload from "../ui/file-upload";
 import Button from "../ui/button";
 
 import priceFormatter from "@/app/utils/price-formatter";
+import { useRouter } from "next/navigation";
+
+import { cartList } from "../ui/cart-popup";
 
 const PaymentSteps = () => {
+  const { push } = useRouter();
+
+  const uploadAndConfirm = () => {
+    push("/order-status/123");
+  };
+
+  // pakai reduce dari javascript, hitung total harga di cartList
+  const totalPrice = cartList.reduce(
+    (total, item) => total + item.price * item.qty,
+    0,
+  );
+
   return (
     <CardWithHeader title="Payment Steps">
       <div className="p-5">
@@ -35,9 +52,13 @@ const PaymentSteps = () => {
       <div className="border-t border-gray-200 p-4">
         <div className="flex justify-between font-semibold">
           <div className="text-sm">Total</div>
-          <div className="text-primary text-xs">{priceFormatter(450000)}</div>
+          <div className="text-primary text-xs">{priceFormatter(totalPrice)}</div>
         </div>
-        <Button variant="dark" className="w-full mt-4">
+        <Button
+          variant="dark"
+          className="w-full mt-4"
+          onClick={uploadAndConfirm}
+        >
           <FiCheckCircle size={20} />
           Upload Receipt & Confirm
         </Button>

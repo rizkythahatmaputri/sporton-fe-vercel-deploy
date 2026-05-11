@@ -1,4 +1,5 @@
 // cart items kanannnya formulir, nanti dipanggil di checkout/page.tsx sebagai komponen CartItems
+"use client";
 
 import { cartList } from "../ui/cart-popup";
 import Button from "../ui/button";
@@ -6,13 +7,18 @@ import Image from "next/image";
 import { FiTrash2, FiCreditCard } from "react-icons/fi";
 import priceFormatter from "@/app/utils/price-formatter";
 import CardWithHeader from "../ui/card-with-header";
+import { useRouter } from "next/navigation";
 
 const CartItems = () => {
+  const { push } = useRouter();
+
   // pakai reduce dari javascript, hitung total harga di cartList
   const totalPrice = cartList.reduce(
     (total, item) => total + item.price * item.qty,
     0,
   );
+
+  const payment = () => {};
 
   return (
     <CardWithHeader title="Cart Items">
@@ -56,7 +62,11 @@ const CartItems = () => {
             {priceFormatter(totalPrice)}
           </div>
         </div>
-        <Button variant="dark" className="w-full mt-4">
+        <Button
+          variant="dark"
+          className="w-full mt-4"
+          onClick={() => push("/payment")}
+        >
           <FiCreditCard size={20} />
           Proceed to Payment
         </Button>
