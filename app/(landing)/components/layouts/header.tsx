@@ -5,13 +5,16 @@ import Link from "next/link";
 import { FiSearch, FiShoppingBag } from "react-icons/fi";
 import CartPopup from "../ui/cart-popup";
 import { useState } from "react";
+import { useCartStore } from "@/app/hooks/use-cart-store";
 
 const Header = () => {
   // kita set klik di icon shopping bag, maka akan muncul cart popup (komponen yang sudah kita buat di ui/cart-popup.tsx)
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+  const { items } = useCartStore();
+
   return (
-    <header>
+    <header className="fixed w-full z-20 backdrop-blur-xl bg-white/50">
       <div className="flex justify-between gap-10 container mx-auto px-4 md:px-10 py-7">
         <Link href="/">
           <Image
@@ -39,9 +42,13 @@ const Header = () => {
             onClick={() => setIsCartOpen(!isCartOpen)}
           >
             <FiShoppingBag size={25} />
-            <div className="bg-primary rounded-full w-4.5 h-4.5 absolute -top-1 -right-1 flex items-center justify-center">
-              <span className="text-white ">3</span>
-            </div>
+            {items.length ? (
+              <div className="bg-primary rounded-full w-4.5 h-4.5 absolute -top-1 -right-1 flex items-center justify-center text-white">
+                {items.length}
+              </div>
+            ) : (
+              <></>
+            )}
           </button>
           {/* kita kasih relative agar posisinya mengikuti posisi dari wrapper (div pembungkus terdekat) */}
           {/* <CartPopup /> */}

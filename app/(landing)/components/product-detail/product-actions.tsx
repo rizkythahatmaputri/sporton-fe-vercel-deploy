@@ -10,13 +10,18 @@ import Button from "../ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const ProductActions = () => {
-  const { push } = useRouter();
+type TProductActionsProps = {
+  product: Product;
+  stock: number;
+};
 
+const ProductActions = ({ product, stock }: TProductActionsProps) => {
+  const { push } = useRouter();
   // logic untuk count product, pakai use state untuk nyimpen jumlah product di ui react
   const [qty, setQty] = useState(1);
-
-  const checkout = () => {};
+  const handleCheckout = () => {
+    push("/checkout");
+  };
 
   return (
     <div className="flex gap-5">
@@ -28,7 +33,7 @@ const ProductActions = () => {
         <div className="flex flex-col">
           <button
             className="border-b border-gray-500 cursor-pointer h-1/2 aspect-square flex items-center justify-center"
-            onClick={() => setQty((qty) => qty + 1)}
+            onClick={() => setQty(qty < stock ? qty + 1 : qty)}
           >
             <FiChevronUp />
           </button>
@@ -45,11 +50,7 @@ const ProductActions = () => {
       <Button className="px-20 w-full">
         <FiShoppingBag size={24} /> Add to Cart
       </Button>
-      <Button
-        variant="dark"
-        className="px-20 w-full"
-        onClick={() => push("/checkout")}
-      >
+      <Button variant="dark" className="px-20 w-full" onClick={handleCheckout}>
         Checkout Now
         <FiArrowRight size={24} />
       </Button>
