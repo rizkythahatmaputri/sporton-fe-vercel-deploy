@@ -3,7 +3,7 @@ import PaymentSteps from "../components/payment/payment-steps";
 
 const Payment = () => {
   return (
-    <main className="bg-gray-100 min-h-[88vh]">
+    <main className="bg-gray-100 min-h-[88vh] pt-20">
       {/* karena konten kita lebih kecil dari container, maka pakai max width supaya tidak terlalu melebar */}
       <div className="max-w-5xl mx-auto py-20">
         <h1 className="text-5xl font-bold text-center mb-10">Payment</h1>

@@ -7,37 +7,6 @@ import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/hooks/use-cart-store";
 import { getImageUrl } from "@/app/lib/api";
 
-export const cartList = [
-  {
-    name: "SportOn Product 1",
-    category: "Running",
-    price: 450000,
-    qty: 2,
-    imageUrl: "shoes-1.svg",
-  },
-  {
-    name: "SportOn Product 2",
-    category: "Tennis",
-    price: 250000,
-    qty: 3,
-    imageUrl: "racket-1.svg",
-  },
-  {
-    name: "SportOn Product 3",
-    category: "Running",
-    price: 230000,
-    qty: 5,
-    imageUrl: "sportshirt-1.svg",
-  },
-  {
-    name: "SportOn Product 4",
-    category: "Football",
-    price: 530000,
-    qty: 5,
-    imageUrl: "football-shoes-1.svg",
-  },
-];
-
 const CartPopup = () => {
   const { push } = useRouter();
   const { items, removeItem } = useCartStore(); // render items dari cart store & remove (trash)

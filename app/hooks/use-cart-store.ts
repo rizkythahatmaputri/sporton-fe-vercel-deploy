@@ -1,8 +1,10 @@
 // ini akan dipanggil di hero/product tombol + untuk masukin ke cart
+// ini custom hooks
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Product } from "../types";
+
 
 export interface CartItem extends Product {
   qty: number;
@@ -23,12 +25,15 @@ interface CartStore {
   reset: () => void;
 }
 
+// === implementasi cart store dengan zustand, nyimpen data cart di local storage browser, sehingga ketika direfresh data ga hilang ===
+
 export const useCartStore = create<CartStore>()(
   // persistant=untuk membuat usestate kalo direfresh datanya tidak hilang, karena disimpan di local storage browser
   persist(
     (set, get) => ({
       customerInfo: null,
       items: [],
+
       setCustomerInfo: (info) => {
         set({ customerInfo: info });
       },
@@ -49,6 +54,7 @@ export const useCartStore = create<CartStore>()(
           set({ items: [...items, { ...product, qty }] }); //3. kalo gaada berarti product baru
         }
       },
+
       removeItem: (productId) => {
         set({ items: get().items.filter((item) => item._id !== productId) });
       },
@@ -56,6 +62,7 @@ export const useCartStore = create<CartStore>()(
         set({ items: [], customerInfo: null });
       },
     }),
+    
     {
       name: "cart-storage",
     },

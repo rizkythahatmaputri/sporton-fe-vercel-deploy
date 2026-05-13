@@ -9,6 +9,8 @@ import {
 import Button from "../ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Product } from "@/app/types";
+import { useCartStore } from "@/app/hooks/use-cart-store";
 
 type TProductActionsProps = {
   product: Product;
@@ -17,10 +19,17 @@ type TProductActionsProps = {
 
 const ProductActions = ({ product, stock }: TProductActionsProps) => {
   const { push } = useRouter();
+
+  const { addItem } = useCartStore();
+
   // logic untuk count product, pakai use state untuk nyimpen jumlah product di ui react
   const [qty, setQty] = useState(1);
   const handleCheckout = () => {
     push("/checkout");
+  };
+
+  const handleAddToCart = () => {
+    addItem(product, qty);
   };
 
   return (
@@ -47,7 +56,7 @@ const ProductActions = ({ product, stock }: TProductActionsProps) => {
       </div>
 
       {/* button primary dan dark */}
-      <Button className="px-20 w-full">
+      <Button className="px-20 w-full" onClick={handleAddToCart}>
         <FiShoppingBag size={24} /> Add to Cart
       </Button>
       <Button variant="dark" className="px-20 w-full" onClick={handleCheckout}>
